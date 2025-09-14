@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Instruct - Personal Knowledge Base Server</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-badge.active {
+            background: rgba(46, 204, 113, 0.3);
+            border: 1px solid #2ecc71;
+        }
+        
+        .info-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .endpoint-list {
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .endpoint {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .method {
+            background: #3498db;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .method.post {
+            background: #2ecc71;
+        }
+        
+        .method.put {
+            background: #f39c12;
+        }
+        
+        .copy-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .config-section {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        pre {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 MCP Instruct</h1>
+        <div class="status-badge active">✅ Server Active</div>
+        
+        <div class="info-box">
+            <h2>Personal Knowledge Base MCP Server</h2>
+            <p style="margin-top: 15px">
+                This MCP server provides persistent personal and organizational knowledge storage 
+                for AI agents with dynamic persona switching and tool execution.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>📡 API Endpoints</h3>
+            <div class="endpoint-list">
+                <div class="endpoint">
+                    <span><span class="method">GET</span> /health</span>
+                    <span>Health check</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method post">POST</span> /chat</span>
+                    <span>Main chat endpoint</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method post">POST</span> /onboard</span>
+                    <span>User onboarding</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method">GET</span> /agents</span>
+                    <span>List agents</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method post">POST</span> /agents/switch</span>
+                    <span>Switch agent</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method">GET</span> /knowledge</span>
+                    <span>Get knowledge base</span>
+                </div>
+                <div class="endpoint">
+                    <span><span class="method put">PUT</span> /knowledge</span>
+                    <span>Update knowledge</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>🔧 ChatGPT Desktop Configuration</h3>
+            <div class="config-section">
+                <h4>MCP Server URL:</h4>
+                <pre id="serverUrl">https://mcp-instruct.netlify.app/.netlify/functions/mcp-bridge</pre>
+                <button class="copy-btn" onclick="copyToClipboard('serverUrl')">📋 Copy URL</button>
+                
+                <h4 style="margin-top: 20px">Authentication:</h4>
+                <p>Bearer token authentication required. Set your API key in ChatGPT Desktop.</p>
+                
+                <h4 style="margin-top: 20px">Test Connection:</h4>
+                <pre>curl -H "Authorization: Bearer YOUR_API_KEY" \
+     https://mcp-instruct.netlify.app/.netlify/functions/mcp-bridge/health</pre>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>🎯 Features</h3>
+            <ul style="text-align: left; list-style: none; padding: 0;">
+                <li>✨ Persistent knowledge storage across sessions</li>
+                <li>🤖 Dynamic AI agent persona switching</li>
+                <li>🔐 Secure API key authentication</li>
+                <li>💬 ChatGPT Desktop compatible</li>
+                <li>⚡ Serverless Netlify Functions</li>
+                <li>🌍 Global CDN distribution</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>MCP Instruct v1.0.0 | Powered by Netlify Functions</p>
+            <p>Created by Hubert</p>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Check server health
+        fetch('/.netlify/functions/mcp-bridge/health')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server health:', data);
+            })
+            .catch(error => {
+                console.error('Health check failed:', error);
+            });
+    </script>
+</body>
+</html>

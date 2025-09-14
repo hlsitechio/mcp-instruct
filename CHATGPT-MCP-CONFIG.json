@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mcp-instruct": {
+      "command": "curl",
+      "args": [
+        "-X", "POST",
+        "-H", "Authorization: Bearer mcp_your_secure_key_here",
+        "-H", "Content-Type: application/json",
+        "--url", "https://superb-trifle-6be3cb.netlify.app/.netlify/functions/mcp-bridge"
+      ],
+      "description": "MCP Instruct - Personal Knowledge Base with AI Agent Personas"
+    }
+  }
+}

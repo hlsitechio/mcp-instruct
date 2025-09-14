@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.netlify/
+.env
+*.log
+*.zip
+deploy*/
+minimal-deploy/
+complete-deploy/
+netlify/functions/*.js

@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Except the main function file
+!mcp-bridge.js
+!.gitignore

@@ -1,0 +1,129 @@
+{
+  "name": "MCP Instruct",
+  "version": "1.0.0",
+  "description": "Personal Knowledge Base & AI Agent Manager - Remember who you are and switch between expert modes",
+  "author": "Hubert",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "server": {
+    "command": "node",
+    "args": ["dist/index.js"],
+    "env": {
+      "NODE_ENV": "production",
+      "MCP_MODE": "chatgpt-desktop"
+    }
+  },
+  "authentication": {
+    "type": "none",
+    "description": "No authentication required for local MCP server"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": true
+  },
+  "tools": [
+    {
+      "name": "onboard",
+      "description": "Start the MCP Instruct onboarding process",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["new", "returning", "auto"],
+            "default": "auto"
+          }
+        }
+      }
+    },
+    {
+      "name": "switch_agent",
+      "description": "Switch to a different AI agent persona",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent": {
+            "type": "string",
+            "enum": ["it-expert", "ethical-hacker", "sales-expert", "blue-team", "red-team", "purple-team"]
+          }
+        },
+        "required": ["agent"]
+      }
+    },
+    {
+      "name": "get_context",
+      "description": "Get current user context and active agent",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "update_profile",
+      "description": "Update user profile information",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["personal", "professional", "preferences", "projects"]
+          },
+          "data": {
+            "type": "object"
+          }
+        },
+        "required": ["category", "data"]
+      }
+    },
+    {
+      "name": "execute_agent_tool",
+      "description": "Execute a tool specific to the current agent",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tool": {
+            "type": "string"
+          },
+          "args": {
+            "type": "string"
+          }
+        },
+        "required": ["tool"]
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "id": "onboarding",
+      "name": "Start MCP Instruct Onboarding",
+      "description": "Begin the setup process for new or returning users",
+      "prompt": "mcp-instruct-onboarding"
+    },
+    {
+      "id": "switch_it",
+      "name": "Switch to IT Expert",
+      "description": "Activate IT Expert agent mode",
+      "prompt": "switch to IT expert mode"
+    },
+    {
+      "id": "switch_hacker",
+      "name": "Switch to Ethical Hacker",
+      "description": "Activate Ethical Hacker agent mode",
+      "prompt": "switch to ethical hacker mode"
+    },
+    {
+      "id": "switch_sales",
+      "name": "Switch to Sales Expert",
+      "description": "Activate Sales Expert agent mode",
+      "prompt": "switch to sales expert mode"
+    },
+    {
+      "id": "status",
+      "name": "Show Status",
+      "description": "Display current profile and active agent",
+      "prompt": "show my MCP status"
+    }
+  ]
+}

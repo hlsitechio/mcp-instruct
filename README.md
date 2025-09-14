@@ -1,4 +1,6 @@
-# Personal Knowledge Base MCP Server
+# MCP Instruct - Personal Knowledge Base with AI Agent Personas
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/hlsitechio/mcp-instruct)
 
 A sophisticated MCP (Model Context Protocol) server that provides persistent personal and organizational knowledge across AI agents. This server acts as a memory layer that any LLM can connect to, instantly giving them context about who you are, what you do, and your preferences.
 
